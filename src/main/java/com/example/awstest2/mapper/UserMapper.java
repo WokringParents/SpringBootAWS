@@ -10,6 +10,9 @@ public interface UserMapper {
     @Select("Select * FROM User WHERE id= #{id}")
     User getUserProfile(@Param("id") String id);
 
+    @Select("Select * FROM User WHERE email= #{email}")
+    User getUserByEmail(@Param("email") String email);
+
     @Select("SELECT * FROM User")
     List<User> getUserProfileList();
 

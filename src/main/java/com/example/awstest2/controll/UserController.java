@@ -20,6 +20,12 @@ public class UserController {
         return mapper.getUserProfile(id);
     }
 
+    @GetMapping("/useremail/{email}")
+    public User getUserByEmail(@PathVariable("email") String email){
+
+        return mapper.getUserByEmail(email);
+    }
+
     @GetMapping("/user/all")
     public List<User> getUserProfileList(){
     return new ArrayList<User>(mapper.getUserProfileList());
