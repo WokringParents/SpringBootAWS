@@ -19,10 +19,10 @@ public interface UserMapper {
     @Insert("INSERT INTO User VALUES(#{id}, #{pw}, #{email}, #{sex}, #{token})")
     int insertUserProfile(@Param("id") String id, @Param("pw") String pw, @Param("email") String email, @Param("sex") String sex, @Param("token") String token);
 
-
     //update User set token="changeToken" where id="tid2"
     @Update("UPDATE User SET token=#{token} WHERE id=#{id}")
     int updateUserToken(@Param("id") String id, @Param("token") String token);
+
 
 
 

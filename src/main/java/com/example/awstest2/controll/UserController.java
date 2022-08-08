@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-
 public class UserController {
 
     private UserMapper mapper;
@@ -22,7 +21,6 @@ public class UserController {
 
     @GetMapping("/useremail/{email}")
     public User getUserByEmail(@PathVariable("email") String email){
-
         return mapper.getUserByEmail(email);
     }
 
