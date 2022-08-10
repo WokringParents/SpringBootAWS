@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.TimeZone;
 
 @RestController
 public class CalendarController {
@@ -22,7 +23,10 @@ public class CalendarController {
     }
 
     @PostMapping("/calendar/{couplenum}")
-    public int insertCalender(@PathVariable("couplenum") int couplenum, @RequestParam("cdate") Timestamp cdate, @RequestParam("ctitle") String ctitle, @RequestParam("ccontent") String ccontent, @RequestParam("csex") String csex) {
+    public int insertCalender(@PathVariable("couplenum") int couplenum, @RequestParam("ctitle") String ctitle, @RequestParam("ccontent") String ccontent, @RequestParam("csex") String csex) {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+        Timestamp cdate = new Timestamp(System.currentTimeMillis());
+
         return mapper.insertCalendar(couplenum,cdate,ctitle,ccontent,csex);
     }
 
