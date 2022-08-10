@@ -6,8 +6,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.TimeZone;
 
 @RestController
 public class ChildController {
@@ -29,7 +30,9 @@ public class ChildController {
     }
 
     @PostMapping("/child/{couplenum}")
-    public int postChildProfile(@RequestParam("name") String name, @RequestParam("sex") String sex,  @RequestParam("birth") String birth,  @RequestParam("center") String center,  @PathVariable("couplenum") int couplenum) {
+    public int postChildProfile(@RequestParam("name") String name, @RequestParam("sex") String sex,  @RequestParam("center") String center,  @PathVariable("couplenum") int couplenum) {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+        Timestamp birth = new Timestamp(System.currentTimeMillis());
         return mapper.insertChildProfile(name,sex,birth,center,couplenum);
     }
 
