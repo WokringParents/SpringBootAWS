@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 @Mapper
 public interface CoupleMapper {
 
+
     @Select("SELECT * FROM Couple WHERE mid=#{id} OR did=#{id}")
     Couple selectCouple(@Param("id")String id);
 

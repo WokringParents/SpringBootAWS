@@ -13,14 +13,14 @@ public class CoupleController {
         this.mapper = mapper;
     }
 
-    @GetMapping("/couple/{id}")
-    public Couple getCoupleNum(@PathVariable("id")String id){
-        return mapper.selectCouple(id);
-    }
-
     @PostMapping("/couple")
     public int postCouple(@RequestParam("mid") String mid, @RequestParam("did") String did) {
         return mapper.insertCouple(mid,did);
+    }
+
+    @GetMapping("/couple/{id}")
+    public Couple getCoupleNum(@PathVariable("id")String id){
+        return mapper.selectCouple(id);
     }
 
     @PostMapping("/couple/address")
