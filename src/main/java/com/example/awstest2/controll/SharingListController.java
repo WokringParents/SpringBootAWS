@@ -17,6 +17,12 @@ public class SharingListController {
         this.mapper = mapper;
     }
 
+
+    @GetMapping("/sharinglist")
+    public List<SharingList> getSharingList(@RequestParam("couplenum") int couplenum, @RequestParam("startdate") Timestamp startdate, @RequestParam("enddate") Timestamp enddate){
+        return mapper.selectSharingList(couplenum,startdate,enddate);
+    }
+
     @PostMapping("/sharinglist")
     public int postSharingList(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") Timestamp sdate, @RequestParam("content") String content){
         return mapper.insertSharingList(couplenum,sdate,content);
@@ -32,10 +38,7 @@ public class SharingListController {
         return mapper.updateFemaleDo(couplenum, sdate);
     }
 
-    @GetMapping("/sharinglist")
-    public List<SharingList> getSharingList(@RequestParam("couplenum") int couplenum, @RequestParam("startdate") Timestamp startdate, @RequestParam("enddate") Timestamp enddate){
-        return mapper.selectSharingList(couplenum,startdate,enddate);
-    }
+
 
 
 }
