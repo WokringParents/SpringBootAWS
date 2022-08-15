@@ -13,6 +13,7 @@ public class Posting {
     private int ccnt;
 
     public Posting(int pno, String pid, String village, String goback, Timestamp pdate, String content, int hcnt, int ccnt) {
+
         this.pno = pno;
         this.pid = pid;
         this.village = village;

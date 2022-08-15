@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface PostingMapper {
 
-    @Select("SELECT * FROM Posting LIMIT 0,5") //5개씩 가져오기
+    @Select("SELECT * FROM Posting ORDER BY pdate DESC")
     List<Posting> getBoardPosting();
 
     @Select("SELECT * FROM Posting ORDER BY hcnt DESC LIMIT #{offset},10")
