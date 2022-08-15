@@ -17,6 +17,7 @@ public interface SharingListMapper {
 
     @Update("UPDATE SharingList SET fdo= 1 WHERE couplenum=#{couplenum} AND sdate=#{sdate}")
     int updateFemaleDo(@Param("couplenum")int couplenum, @Param("sdate")Timestamp sdate);
+
     @Select("SELECT *, WEEKDAY(sdate) FROM SharingList WHERE couplenum=#{couplenum} AND sdate BETWEEN #{startdate} AND #{enddate}")
     List<SharingList> selectSharingList(@Param("couplenum")int couplenum, @Param("startdate") Timestamp startdate, @Param("enddate")Timestamp enddate);
 }
