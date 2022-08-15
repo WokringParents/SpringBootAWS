@@ -23,9 +23,7 @@ public class CalendarController {
     }
 
     @PostMapping("/calendar/{couplenum}")
-    public int insertCalender(@PathVariable("couplenum") int couplenum, @RequestParam("ctitle") String ctitle, @RequestParam("ccontent") String ccontent, @RequestParam("csex") String csex) {
-        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
-        Timestamp cdate = new Timestamp(System.currentTimeMillis());
+    public int insertCalender(@PathVariable("couplenum") int couplenum, @RequestParam("cdate") String cdate, @RequestParam("ctitle") String ctitle, @RequestParam("ccontent") String ccontent, @RequestParam("csex") String csex) {
 
         return mapper.insertCalendar(couplenum,cdate,ctitle,ccontent,csex);
     }

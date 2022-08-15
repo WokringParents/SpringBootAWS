@@ -4,13 +4,13 @@ import java.sql.Timestamp;
 
 public class Calendar {
     private int couplenum;
-    private Timestamp cdate;
+    private String cdate;
     private String ctitle;
     private String ccontent;
     private String csex;
 
 
-    public Calendar(int couplenum, Timestamp cdate, String ctitle, String ccontent, String csex) {
+    public Calendar(int couplenum, String cdate, String ctitle, String ccontent, String csex) {
         this.couplenum = couplenum;
         this.cdate = cdate;
         this.ctitle = ctitle;
@@ -27,11 +27,11 @@ public class Calendar {
         this.couplenum = couplenum;
     }
 
-    public Timestamp getCdate() {
+    public String getCdate() {
         return cdate;
     }
 
-    public void setCdate(Timestamp cdate) {
+    public void setCdate(String cdate) {
         this.cdate = cdate;
     }
 

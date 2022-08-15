@@ -17,11 +17,7 @@ public interface CalendarMapper {
     List<Calendar> getCalendar(@Param("couplenum") int couplenum);
 
     @Insert("INSERT INTO Calendar(couplenum,cdate,ctitle,ccontent,csex) VALUES(#{couplenum}, #{cdate}, #{ctitle}, #{ccontent}, #{csex})")
-    int insertCalendar(@Param("couplenum") int couplenum, @Param("cdate") Timestamp cdate, @Param("ctitle") String ctitle, @Param("ccontent") String ccontent, @Param("csex") String csex);
-
-
-
-
+    int insertCalendar(@Param("couplenum") int couplenum, @Param("cdate") String cdate, @Param("ctitle") String ctitle, @Param("ccontent") String ccontent, @Param("csex") String csex);
 
 
 
