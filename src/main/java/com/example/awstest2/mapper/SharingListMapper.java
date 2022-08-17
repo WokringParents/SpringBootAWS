@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper
 public interface SharingListMapper {
 
-    @Insert("INSERT INTO SharingList(couplenum, sdate, content) VALUES (#{couplenum},#{sdate},#{content})")
-    int insertSharingList(@Param("couplenum") int couplenum, @Param("sdate") Timestamp sdate, @Param("content")String content);
+    @Insert("INSERT INTO SharingList(couplenum, sdate, content, daily) VALUES (#{couplenum},#{sdate},#{content},#{daily})")
+    int insertSharingList(@Param("couplenum") int couplenum, @Param("sdate") Timestamp sdate, @Param("content")String content, @Param("daily")Boolean daily);
 
     @Update("UPDATE SharingList SET mdo= 1 WHERE couplenum=#{couplenum} AND sdate=#{sdate}")
     int updateMaleDo(@Param("couplenum")int couplenum, @Param("sdate")Timestamp sdate);

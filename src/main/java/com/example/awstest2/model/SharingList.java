@@ -9,15 +9,18 @@ public class SharingList {
     private String content;
     private boolean mdo;
     private boolean fdo;
+
+    private boolean daily;
     private int dayOfWeek;
 
 
-    public SharingList(int couplenum, Timestamp sdate, String content, boolean mdo, boolean fdo, int dayOfWeek) {
+    public SharingList(int couplenum, Timestamp sdate, String content, boolean mdo, boolean fdo, boolean daily, int dayOfWeek) {
         this.couplenum = couplenum;
         this.sdate = sdate;
         this.content = content;
         this.mdo = mdo;
         this.fdo = fdo;
+        this.daily=daily;
         this.dayOfWeek = dayOfWeek;
     }
 
@@ -60,6 +63,10 @@ public class SharingList {
     public void setFdo(boolean fdo) {
         this.fdo = fdo;
     }
+
+    public boolean isDaily(){ return daily;}
+
+    public void setDaily(boolean daily){this.daily=daily;}
 
     public int getDayOfWeek() {
         return dayOfWeek;

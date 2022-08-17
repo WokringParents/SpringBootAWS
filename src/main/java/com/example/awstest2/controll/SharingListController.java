@@ -24,8 +24,8 @@ public class SharingListController {
     }
 
     @PostMapping("/sharinglist")
-    public int postSharingList(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") Timestamp sdate, @RequestParam("content") String content){
-        return mapper.insertSharingList(couplenum,sdate,content);
+    public int postSharingList(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") Timestamp sdate, @RequestParam("content") String content, @RequestParam("daily")Boolean daily){
+        return mapper.insertSharingList(couplenum,sdate,content,daily);
     }
 
     @PutMapping("/sharinglist/mdo")
