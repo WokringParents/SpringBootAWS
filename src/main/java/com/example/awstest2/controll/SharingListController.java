@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.TimeZone;
 
 @RestController
 public class SharingListController {
@@ -24,8 +25,17 @@ public class SharingListController {
     }
 
     @PostMapping("/sharinglist")
-    public int postSharingList(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") Timestamp sdate, @RequestParam("content") String content, @RequestParam("daily")Boolean daily){
-        return mapper.insertSharingList(couplenum,sdate,content,daily);
+    public int postSharingList(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate, @RequestParam("content") String content, @RequestParam("daily")Boolean daily,@RequestParam("enddate")String enddate){
+
+      if(daily.booleanValue()){
+          //데일리 스케쥴이라면
+          String startdate= sdate.substring(0,10);  //0~9까지 yyyy-mm-dd
+          return mapper.insertDailyList(couplenum,sdate,content,enddate,startdate);
+      }
+      else
+      {
+          return mapper.insertTodayList(couplenum,sdate,content);
+      }
     }
 
     @PutMapping("/sharinglist/mdo")
