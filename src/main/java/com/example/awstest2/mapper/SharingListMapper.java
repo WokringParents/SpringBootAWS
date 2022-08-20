@@ -17,10 +17,10 @@ public interface SharingListMapper {
     int insertTodayList(@Param("couplenum") int couplenum, @Param("sdate") String sdate, @Param("content")String content);
 
     @Update("UPDATE SharingList SET mdo= 1 WHERE couplenum=#{couplenum} AND sdate=#{sdate}")
-    int updateMaleDo(@Param("couplenum")int couplenum, @Param("sdate")Timestamp sdate);
+    int updateMaleDo(@Param("couplenum")int couplenum, @Param("sdate")String sdate);
 
     @Update("UPDATE SharingList SET fdo= 1 WHERE couplenum=#{couplenum} AND sdate=#{sdate}")
-    int updateFemaleDo(@Param("couplenum")int couplenum, @Param("sdate")Timestamp sdate);
+    int updateFemaleDo(@Param("couplenum")int couplenum, @Param("sdate")String sdate);
 
     @Select("SELECT *, WEEKDAY(sdate) FROM SharingList WHERE couplenum=#{couplenum} AND sdate BETWEEN #{startdate} AND #{enddate}")
     List<SharingList> selectSharingList(@Param("couplenum")int couplenum, @Param("startdate") Timestamp startdate, @Param("enddate")Timestamp enddate);

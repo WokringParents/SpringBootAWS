@@ -39,12 +39,12 @@ public class SharingListController {
     }
 
     @PutMapping("/sharinglist/mdo")
-    public int putMaleDo(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") Timestamp sdate){
+    public int putMaleDo(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate){
         return mapper.updateMaleDo(couplenum,sdate);
     }
 
     @PutMapping("/sharinglist/fdo")
-    public int putFemaleDo(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") Timestamp sdate) {
+    public int putFemaleDo(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate) {
         return mapper.updateFemaleDo(couplenum, sdate);
     }
 
