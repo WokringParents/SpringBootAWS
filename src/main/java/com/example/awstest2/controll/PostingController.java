@@ -44,7 +44,7 @@ public class PostingController {
     }
 
     @PostMapping("/posting/{pid}")        //서버 인터네셔널 오류
-    public int postBoardPosting(@PathVariable("pid") String pid, @RequestParam("village") String village, @RequestParam("goback") String goback,
+    public Posting postBoardPosting(@PathVariable("pid") String pid, @RequestParam("village") String village, @RequestParam("goback") String goback,
                                 @RequestParam("content") String content) {
 
         //생각해보니 pdate 도 sysdate하면 되지 않을까?
