@@ -51,7 +51,8 @@ public class PostingController {
         //pno는 자동추가, cnt 종류들은 디폴트가 0 이니까 필요 엑스, pdate는 시스템 현재 시간
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
         Timestamp pdate = new Timestamp(System.currentTimeMillis());
-        return mapper.insertBoardPosting(pid, village, goback, pdate, content);
+        mapper.insertBoardPosting(pid, village, goback, pdate, content);
+        return mapper.getBoardPostingbyPno(pid,content);
     }
 
     @PutMapping("/posting/ccnt/{pno}")

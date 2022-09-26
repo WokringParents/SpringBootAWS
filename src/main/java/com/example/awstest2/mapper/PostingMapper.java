@@ -9,6 +9,9 @@ import java.util.List;
 @Mapper
 public interface PostingMapper {
 
+    @Select("SELECT * FROM Posting WHERE pid=#{pid} AND content=#{content} ")
+    Posting getBoardPostingbyPno(@Param("pid")String pid, @Param("content") String content);
+
     @Select("SELECT * FROM Posting ORDER BY pdate DESC")
     List<Posting> getBoardPosting();
 
@@ -29,7 +32,7 @@ public interface PostingMapper {
 
 
     @Insert("INSERT INTO Posting (pid,village,goback,pdate,content) VALUES (#{pid},#{village},#{goback},#{pdate},#{content})")
-    Posting insertBoardPosting(@Param("pid")String pid,@Param("village") String village,@Param("goback") String goback ,@Param("pdate") Timestamp pdate, @Param("content")String content);
+    int insertBoardPosting(@Param("pid")String pid,@Param("village") String village,@Param("goback") String goback ,@Param("pdate") Timestamp pdate, @Param("content")String content);
 
 
     @Update("UPDATE Posting SET hcnt = hcnt+1 WHERE pno=#{pno}")
