@@ -28,4 +28,17 @@ public class CalendarController {
         return mapper.insertCalendar(couplenum,cdate,ctitle,ccontent,csex);
     }
 
+    @PutMapping("/calendar/{couplenum}")
+    public int putCalendar(@PathVariable("couplenum")int couplenum, @RequestParam("cdate")String cdate, @RequestParam("ctitle") String ctitle, @RequestParam("ccontent") String ccontent) {
+
+        return mapper.putCalendar(couplenum,cdate,ctitle,ccontent);
+
+    }
+
+    @DeleteMapping("/calendar/{couplenum}")
+    public int deleteCalendar(@PathVariable("couplenum")int couplenum, @RequestParam("cdate")String cdate)
+    {
+        return mapper.deleteCalendar(couplenum,cdate);
+    }
+
 }
