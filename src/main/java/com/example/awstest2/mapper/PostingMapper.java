@@ -24,12 +24,12 @@ public interface PostingMapper {
     List<Posting> getBoardOffsetbyCcnt(@Param("offset")int offset);
 
 
-    @Select("SELECT * FROM Posting WHERE pcontent LIKE CONCAT('%',#{content},'%')")
+    @Select("SELECT * FROM Posting WHERE content LIKE CONCAT('%',#{content},'%')")
     List<Posting> getPostingbyContent(@Param("content")String content);
 
 
     @Insert("INSERT INTO Posting (pid,village,goback,pdate,content) VALUES (#{pid},#{village},#{goback},#{pdate},#{content})")
-    int insertBoardPosting(@Param("pid")String pid,@Param("village") String village,@Param("goback") String goback ,@Param("pdate") Timestamp pdate, @Param("content")String content);
+    Posting insertBoardPosting(@Param("pid")String pid,@Param("village") String village,@Param("goback") String goback ,@Param("pdate") Timestamp pdate, @Param("content")String content);
 
 
     @Update("UPDATE Posting SET hcnt = hcnt+1 WHERE pno=#{pno}")
