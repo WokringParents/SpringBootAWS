@@ -25,15 +25,15 @@ public class PostingController {
         return mapper.getBoardPosting();
     }
 
-    @GetMapping("/posting/{offset}/{attribute}")
-    public List<Posting> getBoardOffset(@PathVariable("offset") int offset, @PathVariable("attribute") String attribute) {
+    @GetMapping("/posting/{attribute}")
+    public List<Posting> getBoardOffset(@PathVariable("attribute") String attribute) {
 
         if (attribute.equals("pdate")) {
-            return mapper.getBoardOffsetbyDate(offset);
+            return mapper.getBoardPosting();
         } else if (attribute.equals("hcnt")) {
-            return mapper.getBoardOffsetbyHcnt(offset);
+            return mapper.getBoardOffsetbyHcnt();
         } else {
-            return mapper.getBoardOffsetbyCcnt(offset);
+            return mapper.getBoardOffsetbyCcnt();
         }
     }
 

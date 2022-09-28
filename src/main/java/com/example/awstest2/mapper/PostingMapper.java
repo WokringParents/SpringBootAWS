@@ -15,16 +15,14 @@ public interface PostingMapper {
     @Select("SELECT * FROM Posting ORDER BY pdate DESC")
     List<Posting> getBoardPosting();
 
-    @Select("SELECT * FROM Posting ORDER BY hcnt DESC LIMIT #{offset},10")
-    List<Posting> getBoardOffsetbyHcnt(@Param("offset")int offset);
+    @Select("SELECT * FROM Posting ORDER BY hcnt DESC")
+    List<Posting> getBoardOffsetbyHcnt();
 
+    @Select("SELECT * FROM Posting ORDER BY ccnt DESC")
+    List<Posting> getBoardOffsetbyCcnt();
 
-    @Select("SELECT * FROM Posting ORDER BY pdate DESC LIMIT #{offset},10")
-    List<Posting> getBoardOffsetbyDate(@Param("offset")int offset);
-
-
-    @Select("SELECT * FROM Posting ORDER BY ccnt DESC LIMIT #{offset},10")
-    List<Posting> getBoardOffsetbyCcnt(@Param("offset")int offset);
+    //@Select("SELECT * FROM Posting ORDER BY pdate DESC LIMIT #{offset},10")
+    //List<Posting> getBoardOffsetbyDate(@Param("offset")int offset);
 
 
     @Select("SELECT * FROM Posting WHERE content LIKE CONCAT('%',#{content},'%')")
