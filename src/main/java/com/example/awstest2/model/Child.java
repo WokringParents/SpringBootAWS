@@ -5,18 +5,36 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Child {
-    private String name;
-    private String sex;
-    private Timestamp birth;
-    private String center;
-    private int couplenum;
+   private int couplenum;
+   private int childId;
 
-    public Child(String name, String sex, Timestamp birth, String center, int couplenum) {
-        this.name = name;
-        this.sex = sex;
-        this.birth = birth;
-        this.center = center;
+   private String kname;
+   private String name;
+   private String sex;
+
+
+    public int getCouplenum() {
+        return couplenum;
+    }
+
+    public void setCouplenum(int couplenum) {
         this.couplenum = couplenum;
+    }
+
+    public int getChildId() {
+        return childId;
+    }
+
+    public void setChildId(int childId) {
+        this.childId = childId;
+    }
+
+    public String getKname() {
+        return kname;
+    }
+
+    public void setKname(String kname) {
+        this.kname = kname;
     }
 
     public String getName() {
@@ -35,27 +53,4 @@ public class Child {
         this.sex = sex;
     }
 
-    public Timestamp getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Timestamp birth) {
-        this.birth = birth;
-    }
-
-    public String getCenter() {
-        return center;
-    }
-
-    public void setCenter(String center) {
-        this.center = center;
-    }
-
-    public int getCouplenum() {
-        return couplenum;
-    }
-
-    public void setCouplenum(int couplenum) {
-        this.couplenum = couplenum;
-    }
 }

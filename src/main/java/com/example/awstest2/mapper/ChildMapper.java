@@ -20,9 +20,7 @@ public interface ChildMapper {
     @Select("SELECT * FROM Child WHERE couplenum=#{couplenum} AND name=#{name}")
     Child getChildProfile(@Param("couplenum") int couplenum, @Param("name")String name);
 
-    @Insert("INSERT INTO Child VALUES(#{name}, #{sex}, #{birth}, #{center}, #{couplenum})")
-    int insertChildProfile(@Param("name") String name, @Param("sex") String sex, @Param("birth") Timestamp birth, @Param("center") String center, @Param("couplenum") int couplenum);
-
-
+    @Insert("INSERT INTO Child (couplenum,kname,name,sex) VALUES(#{couplenum}, #{kname}, #{name}, #{sex})")
+    int insertChildProfile(@Param("couplenum") int couplenum, @Param("kname") String kname, @Param("name") String name, @Param("sex") String sex);
 
 }

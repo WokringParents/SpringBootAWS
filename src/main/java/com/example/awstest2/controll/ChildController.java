@@ -30,10 +30,8 @@ public class ChildController {
     }
 
     @PostMapping("/child/{couplenum}")
-    public int postChildProfile(@RequestParam("name") String name, @RequestParam("sex") String sex,  @RequestParam("center") String center,  @PathVariable("couplenum") int couplenum) {
-        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
-        Timestamp birth = new Timestamp(System.currentTimeMillis());
-        return mapper.insertChildProfile(name,sex,birth,center,couplenum);
+    public int postChildProfile(@PathVariable("couplenum") int couplenum, @RequestParam("kname") String kname,  @RequestParam("name") String name,  @RequestParam("sex") String sex) {
+        return mapper.insertChildProfile(couplenum, kname, name, sex);
     }
 
 
