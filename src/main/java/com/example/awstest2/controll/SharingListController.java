@@ -54,8 +54,8 @@ public class SharingListController {
     }
 
     @PutMapping("/sharinglist/content")
-    public int putContent(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate,@RequestParam("content") String content){
-        return mapper.updateContent(couplenum,sdate,content);
+    public int putContent(@RequestParam("couplenum") int couplenum,@RequestParam("content") String content){
+        return mapper.updateContent(couplenum,content);
     }
 
 
