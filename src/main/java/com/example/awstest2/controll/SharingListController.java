@@ -38,6 +38,11 @@ public class SharingListController {
       }
     }
 
+    @DeleteMapping("/sharinglist")
+    public int deleteSharingList(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate){
+        return mapper.deleteSharingList(couplenum,sdate);
+    }
+
     @PutMapping("/sharinglist/mdo")
     public int putMaleDo(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate){
         return mapper.updateMaleDo(couplenum,sdate);
@@ -48,7 +53,10 @@ public class SharingListController {
         return mapper.updateFemaleDo(couplenum, sdate);
     }
 
-
+    @PutMapping("/sharinglist/content")
+    public int putContent(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate,@RequestParam("content") String content){
+        return mapper.updateContent(couplenum,sdate,content);
+    }
 
 
 }

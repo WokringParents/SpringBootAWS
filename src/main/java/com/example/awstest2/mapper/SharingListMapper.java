@@ -24,4 +24,11 @@ public interface SharingListMapper {
 
     @Select("SELECT *, WEEKDAY(sdate) FROM SharingList WHERE couplenum=#{couplenum} AND sdate BETWEEN #{startdate} AND #{enddate}")
     List<SharingList> selectSharingList(@Param("couplenum")int couplenum, @Param("startdate") Timestamp startdate, @Param("enddate")Timestamp enddate);
+
+    @Update("UPDATE SharingList SET content= #{content} WHERE couplenum=#{couplenum} AND sdate=#{sdate}")
+    int updateContent(@Param("couplenum")int couplenum, @Param("sdate")String sdate,@Param("content") String content);
+
+    @Delete("DELETE FROM SharingList WHERE couplenum=#{couplenum} AND sdate=#{sdate}")
+    int deleteSharingList(@Param("couplenum")int couplenum, @Param("sdate")String sdate);
+
 }
