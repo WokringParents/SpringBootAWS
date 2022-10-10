@@ -30,8 +30,8 @@ public class UserController {
     }
 
     @PostMapping("/user/{id}")
-    public int postUserProfile(@PathVariable("id") String id, @RequestParam("pw") String pw,@RequestParam("email") String email,@RequestParam("sex") String sex, @RequestParam("token") String token) {
-       return mapper.insertUserProfile(id,pw,email,sex,token);
+    public int postUserProfile(@PathVariable("id") String id, @RequestParam("pw") String pw,@RequestParam("email") String email,@RequestParam("sex") String sex, @RequestParam("token") String token, @RequestParam("name") String name, @RequestParam("pnumber") String pnumber, @RequestParam("city") String city,@RequestParam("village") String village) {
+       return mapper.insertUserProfile(id,pw,email,sex,token,name,pnumber,city,village);
     }
 
     @PutMapping("/user/{id}")
