@@ -34,5 +34,4 @@ public class ChildController {
         return mapper.insertChildProfile(couplenum, kname, name, sex);
     }
 
-
 }
