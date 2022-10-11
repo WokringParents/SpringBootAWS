@@ -25,7 +25,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/user/{village}")
+    @GetMapping("/usertoken/{village}")
     public List<String> getTokenListByVillage(@PathVariable("village")String village){
         return mapper.getUserTokenList(village);
     }
