@@ -38,10 +38,17 @@ public class SharingListController {
       }
     }
 
-    @DeleteMapping("/sharinglist")
-    public int deleteSharingList(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate){
-        return mapper.deleteSharingList(couplenum,sdate);
+    @DeleteMapping("/sharinglist/today")
+    public int deleteTodaySharingList(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate){
+        return mapper.deleteTodaySharingList(couplenum,sdate);
     }
+
+    @DeleteMapping("/sharinglist/daily")
+    public int deleteDailySharingList(@RequestParam("couplenum") int couplenum,@RequestParam("content") String content,@RequestParam("startdate") Timestamp startdate, @RequestParam("enddate") Timestamp enddate ){
+        return mapper.deleteDailySharingList(couplenum,content,startdate,enddate);
+    }
+
+
 
     @PutMapping("/sharinglist/mdo")
     public int putMaleDo(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate){
@@ -53,10 +60,16 @@ public class SharingListController {
         return mapper.updateFemaleDo(couplenum, sdate);
     }
 
-    @PutMapping("/sharinglist/content")
-    public int putContent(@RequestParam("couplenum") int couplenum,@RequestParam("content") String content){
-        return mapper.updateContent(couplenum,content);
+
+    @DeleteMapping("/sharinglist/daily")
+    public int putDailiyContent(@RequestParam("couplenum") int couplenum,@RequestParam("prevcontent") String prevcontent, @RequestParam("content") String content,@RequestParam("startdate") Timestamp startdate, @RequestParam("enddate") Timestamp enddate ){
+        return mapper.updateDailyContent(couplenum,content,prevcontent,startdate,enddate);
     }
 
+    @PutMapping("/sharinglist/today")
+    public int putTodayContent(@RequestParam("couplenum") int couplenum, @RequestParam("sdate") String sdate, @RequestParam("content") String content){
+        return mapper.updateTodayContent(couplenum,sdate,content);
+    }
 
+    //@RequestParam("prevcontent")String prevcontent
 }

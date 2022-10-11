@@ -25,10 +25,18 @@ public interface SharingListMapper {
     @Select("SELECT *, WEEKDAY(sdate) FROM SharingList WHERE couplenum=#{couplenum} AND sdate BETWEEN #{startdate} AND #{enddate}")
     List<SharingList> selectSharingList(@Param("couplenum")int couplenum, @Param("startdate") Timestamp startdate, @Param("enddate")Timestamp enddate);
 
-    @Update("UPDATE SharingList SET content= #{content} WHERE couplenum=#{couplenum} AND content=#{content}")
-    int updateContent(@Param("couplenum")int couplenum, @Param("content") String content);
+
+    @Update("UPDATE SharingList SET content= #{content} WHERE couplenum=#{couplenum} AND sdate=#{sdate}")
+    int updateTodayContent(@Param("couplenum")int couplenum, @Param("sdate")String sdate,@Param("content") String content);
+
+
+    @Update("UPDATE SharingList SET content= #{content} WHERE couplenum=#{couplenum} AND content=#{prevcontent} AND sdate BETWEEN #{startdate} AND #{enddate}")
+    int updateDailyContent(@Param("couplenum")int couplenum,  @Param("prevcontent")String prevcontent,@Param("content") String content, @Param("startdate") Timestamp startdate, @Param("enddate")Timestamp enddate);
 
     @Delete("DELETE FROM SharingList WHERE couplenum=#{couplenum} AND sdate=#{sdate}")
-    int deleteSharingList(@Param("couplenum")int couplenum, @Param("sdate")String sdate);
+    int deleteTodaySharingList(@Param("couplenum")int couplenum, @Param("sdate")String sdate);
+
+    @Delete("DELETE FROM SharingList WHERE couplenum=#{couplenum} AND content=#{content} AND sdate BETWEEN #{startdate} AND #{enddate}")
+    int deleteDailySharingList(@Param("couplenum")int couplenum,@Param("content")String content, @Param("startdate") Timestamp startdate, @Param("enddate")Timestamp enddate);
 
 }
