@@ -31,12 +31,12 @@ public interface SharingListMapper {
 
 
     @Update("UPDATE SharingList SET content= #{content} WHERE couplenum=#{couplenum} AND content=#{prevcontent} AND sdate BETWEEN #{startdate} AND #{enddate}")
-    int updateDailyContent(@Param("couplenum")int couplenum,  @Param("prevcontent")String prevcontent,@Param("content") String content, @Param("startdate") Timestamp startdate, @Param("enddate")Timestamp enddate);
+    int updateDailyContent(@Param("couplenum")int couplenum,  @Param("prevcontent")String prevcontent,@Param("content") String content, @Param("startdate") String startdate, @Param("enddate")String enddate);
 
     @Delete("DELETE FROM SharingList WHERE couplenum=#{couplenum} AND sdate=#{sdate}")
     int deleteTodaySharingList(@Param("couplenum")int couplenum, @Param("sdate")String sdate);
 
     @Delete("DELETE FROM SharingList WHERE couplenum=#{couplenum} AND content=#{content} AND sdate BETWEEN #{startdate} AND #{enddate}")
-    int deleteDailySharingList(@Param("couplenum")int couplenum,@Param("content")String content, @Param("startdate") Timestamp startdate, @Param("enddate")Timestamp enddate);
+    int deleteDailySharingList(@Param("couplenum")int couplenum,@Param("content")String content, @Param("startdate") String startdate, @Param("enddate")String enddate);
 
 }
