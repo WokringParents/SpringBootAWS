@@ -23,16 +23,18 @@ public class CoupleController {
     @GetMapping("/couple/{id}")
     public Couple getCouple(@PathVariable("id")String id){
 
-        Couple couple = mapper.selectCouple(id);
+        Couple couple = new Couple( mapper.selectCouple(id));
 
         if(couple!=null){
 
-            if(couple.getDid()==id){
+            if(couple.getDid().equals(id)){
                 //아빠일때 엄마 아이디 이름가져옴
                 couple.setSpousename(mapper.selectSpouseName(couple.getMid()));
-            }else
+            }else {
+               // System.out.println("did"+couple.getDid());
+               // System.out.println("mid"+couple.getMid());
                 couple.setSpousename(mapper.selectSpouseName(couple.getDid()));
-
+            }
         }
         return couple;
     }

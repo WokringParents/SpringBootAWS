@@ -8,11 +8,17 @@ public class Couple {
 
     private String spousename;
 
-    public Couple(int couplenum, String mid, String did, String spousename) {
+    public Couple(int couplenum, String mid, String did) {
         this.couplenum = couplenum;
         this.mid = mid;
         this.did = did;
-        this.spousename=spousename;
+    }
+
+    public Couple(Couple selectCouple) {
+        this.couplenum=selectCouple.couplenum;
+        this.mid=selectCouple.mid;
+        this.did=selectCouple.did;
+        this.spousename=null;
     }
 
     public int getCouplenum() {
