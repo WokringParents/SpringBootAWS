@@ -6,16 +6,13 @@ public class Couple {
     private String mid;
     private String did;
 
-    private String city;
+    private String spousename;
 
-    private String village;
-
-    public Couple(int couplenum, String mid, String did, String city, String village) {
+    public Couple(int couplenum, String mid, String did, String spousename) {
         this.couplenum = couplenum;
         this.mid = mid;
         this.did = did;
-        this.city = city;
-        this.village = village;
+        this.spousename=spousename;
     }
 
     public int getCouplenum() {
@@ -42,19 +39,11 @@ public class Couple {
         this.did = did;
     }
 
-    public String getCity() {
-        return city;
+    public String getSpousename() {
+        return spousename;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getVillage() {
-        return village;
-    }
-
-    public void setVillage(String village) {
-        this.village = village;
+    public void setSpousename(String spousename) {
+        this.spousename = spousename;
     }
 }

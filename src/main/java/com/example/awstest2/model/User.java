@@ -5,7 +5,6 @@ public class User {
     private String pw;
     private String email;
     private String sex;
-
     private String token;
 
     private String name;

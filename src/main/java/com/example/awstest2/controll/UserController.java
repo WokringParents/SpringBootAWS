@@ -24,6 +24,12 @@ public class UserController {
         return mapper.getUserByEmail(email);
     }
 
+
+    @GetMapping("/user/{village}")
+    public List<String> getTokenListByVillage(@PathVariable("village")String village){
+        return mapper.getUserTokenList(village);
+    }
+
     @GetMapping("/user/all")
     public List<User> getUserProfileList(){
     return new ArrayList<User>(mapper.getUserProfileList());
@@ -41,35 +47,5 @@ public class UserController {
 
 
 
-  /*  @DeleteMapping("/user/{id}")
-    public void deleteUserProfile(@PathVariable("id") String id){
-        mapper.deleteUserProfile(id);
-    }
-  */
-
-
-    /*
-    //글읽는사이에 다른 사람이 댓글을 추가하거나 공감하거나 등등 포스팅 정보의 변화가 생길 수있으므로 어플 자체에서 +1 한 값으로 업데이트를 하는게 아니라 DB값에서 +1을하던 -1을 하던 해줘야한다.
-	@PutMapping("/posting/hcnt/{pno}")
-	public int putHeartCnt(@PathVariable("pno")int pno, @RequestParam("sign")String sign) {
-
-		if(sign.equals("plus")) {
-			return mapper.updateHcntPlus(pno);
-		}
-		else
-		{
-			return mapper.updateHcntMinus(pno);
-		}
-	}
-
-	@PutMapping("/posting/vcnt/{pno}")
-	public int putViewsCnt(@PathVariable("pno")int pno) {
-		return mapper.updateVcntPlus(pno);
-	}
-
-	@DeleteMapping("/posting/delete")
-	public int deleteBoardPosting(@RequestParam("pno")int pno) {
-		return mapper.deleteBoardPosting(pno);
-	}*/
 
 }
