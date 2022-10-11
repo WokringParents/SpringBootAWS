@@ -61,7 +61,7 @@ public class SharingListController {
     }
 
 
-    @DeleteMapping("/sharinglist/daily")
+    @PutMapping("/sharinglist/daily")
     public int putDailiyContent(@RequestParam("couplenum") int couplenum,@RequestParam("prevcontent") String prevcontent, @RequestParam("content") String content,@RequestParam("startdate") Timestamp startdate, @RequestParam("enddate") Timestamp enddate ){
         return mapper.updateDailyContent(couplenum,content,prevcontent,startdate,enddate);
     }
