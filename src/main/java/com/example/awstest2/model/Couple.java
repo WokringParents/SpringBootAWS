@@ -15,10 +15,15 @@ public class Couple {
     }
 
     public Couple(Couple selectCouple) {
-        this.couplenum=selectCouple.couplenum;
-        this.mid=selectCouple.mid;
-        this.did=selectCouple.did;
-        this.spousename=null;
+
+        if(selectCouple==null){
+            this.couplenum= -1;
+        }else {
+            this.couplenum = selectCouple.couplenum;
+            this.mid = selectCouple.mid;
+            this.did = selectCouple.did;
+            this.spousename = null;
+        }
     }
 
     public int getCouplenum() {
