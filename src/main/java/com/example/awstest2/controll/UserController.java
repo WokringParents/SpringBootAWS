@@ -1,5 +1,6 @@
 package com.example.awstest2.controll;
 import com.example.awstest2.mapper.UserMapper;
+import com.example.awstest2.model.Child;
 import com.example.awstest2.model.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,6 @@ public class UserController {
         return mapper.getUserByEmail(email);
     }
 
-
     @GetMapping("/usertoken/{village}")
     public List<String> getTokenListByVillage(@PathVariable("village")String village){
         return mapper.getUserTokenList(village);
@@ -32,12 +32,12 @@ public class UserController {
 
     @GetMapping("/user/all")
     public List<User> getUserProfileList(){
-    return new ArrayList<User>(mapper.getUserProfileList());
+        return new ArrayList<User>(mapper.getUserProfileList());
     }
 
     @PostMapping("/user/{id}")
     public int postUserProfile(@PathVariable("id") String id, @RequestParam("pw") String pw,@RequestParam("email") String email,@RequestParam("sex") String sex, @RequestParam("token") String token, @RequestParam("name") String name, @RequestParam("pnumber") String pnumber, @RequestParam("city") String city,@RequestParam("village") String village) {
-       return mapper.insertUserProfile(id,pw,email,sex,token,name,pnumber,city,village);
+        return mapper.insertUserProfile(id,pw,email,sex,token,name,pnumber,city,village);
     }
 
     @PutMapping("/user/{id}")

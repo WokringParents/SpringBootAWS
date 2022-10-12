@@ -28,6 +28,10 @@ public class ChildController {
         System.out.println(couplenum+name);
         return mapper.getChildProfile(couplenum,name);
     }
+    @GetMapping("/childHaving/{couplenum}")
+    public Child getChildHaving(@PathVariable("couplenum") int couplenum) {
+        return mapper.getChildHaving(couplenum);
+    }
 
     @PostMapping("/child/{couplenum}")
     public int postChildProfile(@PathVariable("couplenum") int couplenum, @RequestParam("kname") String kname,  @RequestParam("name") String name,  @RequestParam("sex") String sex) {

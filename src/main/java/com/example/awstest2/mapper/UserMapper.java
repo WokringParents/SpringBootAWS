@@ -1,4 +1,5 @@
 package com.example.awstest2.mapper;
+import com.example.awstest2.model.Child;
 import com.example.awstest2.model.User;
 import org.apache.ibatis.annotations.*;
 
