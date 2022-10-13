@@ -3,14 +3,15 @@ package com.example.awstest2.mapper;
 import com.example.awstest2.model.Posting;
 import org.apache.ibatis.annotations.*;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
 public interface PostingMapper {
 
-    @Select("SELECT * FROM Posting WHERE pid=#{pid} AND content=#{content} ")
-    Posting getBoardPostingbyPno(@Param("pid")String pid, @Param("content") String content);
+    @Select("SELECT * FROM Posting WHERE pid=#{pid} AND pdate=#{pdate} AND content=#{content}")
+    Posting getBoardPostingbyPno(@Param("pid")String pid, @Param("pdate") Timestamp pdate, @Param("content") String content);
 
     @Select("SELECT * FROM Posting ORDER BY pdate DESC")
     List<Posting> getBoardPosting();

@@ -52,7 +52,7 @@ public class PostingController {
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
         Timestamp pdate = new Timestamp(System.currentTimeMillis());
         mapper.insertBoardPosting(pid, village, goback, pdate, content);
-        return mapper.getBoardPostingbyPno(pid,content);
+        return mapper.getBoardPostingbyPno(pid,pdate,content);
     }
 
     @PutMapping("/posting/ccnt/{pno}")
