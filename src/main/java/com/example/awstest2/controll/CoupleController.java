@@ -16,8 +16,9 @@ public class CoupleController {
     }
 
     @PostMapping("/couple")
-    public int postCouple(@RequestParam("mid") String mid, @RequestParam("did") String did) {
-        return mapper.insertCouple(mid,did);
+    public Couple postCouple(@RequestParam("mid") String mid, @RequestParam("did") String did) {
+        mapper.insertCouple(mid,did);
+        return mapper.selectCouple(mid);
     }
 
     @GetMapping("/couple/{id}")
