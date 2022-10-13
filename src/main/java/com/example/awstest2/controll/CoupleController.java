@@ -16,9 +16,22 @@ public class CoupleController {
     }
 
     @PostMapping("/couple")
-    public Couple postCouple(@RequestParam("mid") String mid, @RequestParam("did") String did) {
+    public Couple postCouple(@RequestParam("mid") String mid, @RequestParam("did") String did, @RequestParam("sex") String sex) {
         mapper.insertCouple(mid,did);
-        return mapper.selectCouple(mid);
+
+        Couple couple = new Couple( mapper.selectCouple(did));
+
+        if(sex.equals("M")){
+            //아빠일때 엄마 아이디 이름가져옴
+            couple.setSpousename(mapper.selectSpouseName(couple.getMid()));
+        }else {
+            System.out.println("did"+couple.getDid());
+            System.out.println("mid"+couple.getMid());
+            couple.setSpousename(mapper.selectSpouseName(couple.getDid()));
+        }
+
+        return couple;
+
     }
 
     @GetMapping("/couple/{id}")
