@@ -18,13 +18,21 @@ public class NoticeController {
         this.mapper = mapper;
     }
 
-    @PostMapping("/notice/{tid}")        //서버 인터네셔널 오류
-    public int postNotice(@PathVariable("tid") int tid, @RequestParam("ntitle") String ntitle,
+    @PostMapping("/notice/{tid}")
+    public Notice postNotice(@PathVariable("tid") int tid, @RequestParam("ntitle") String ntitle,
                           @RequestParam("ncontent") String ncontent,  @RequestParam("image") String image) {
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
-        Timestamp ndate = new Timestamp(System.currentTimeMillis());
-        return mapper.insertNotice(tid,ndate,ntitle,ncontent,image);
+        String ndate = new Timestamp(System.currentTimeMillis()).toString();
+        ndate=ndate.substring(0,ndate.length()-4);
+        mapper.insertNotice(tid,ndate,ntitle,ncontent,image);
+        return mapper.getNoticeId(tid,ndate,ncontent);
+    }
+
+    @GetMapping("/notice/nid")
+    public Notice getNoticebyContent(@RequestParam("tid") int tid, @RequestParam("ndate") String ndate,
+                                  @RequestParam("ncontent") String ncontent) {
+        return mapper.getNoticeId(tid,ndate,ncontent);
     }
 
 

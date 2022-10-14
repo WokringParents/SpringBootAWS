@@ -13,10 +13,10 @@ public interface NoticeMapper {
     @Select("SELECT * FROM Notice ORDER BY ndate DESC")
     List<Notice> getNotice();
 
-    @Select("SELECT nid FROM Posting WHERE pid=#{tid} AND pdate=#{ndate} AND content=#{ncontent}")
-    Posting getNoticeId(@Param("tid")String tid, @Param("ndate") Timestamp ndate, @Param("ncontent") String ncontent);
+    @Select("SELECT * FROM Notice WHERE tid=#{tid} AND ndate=#{ndate} AND ncontent=#{ncontent}")
+    Notice getNoticeId(@Param("tid")int tid, @Param("ndate") String ndate, @Param("ncontent") String ncontent);
 
     @Insert("INSERT INTO Notice (tid,ndate,ntitle,ncontent,image) VALUES (#{tid},#{ndate},#{ntitle},#{ncontent},#{image})")
-    int insertNotice(@Param("tid")int tid,@Param("ndate") Timestamp ndate,@Param("ntitle") String ntitle ,@Param("ncontent") String ncontent, @Param("image")String image);
+    int insertNotice(@Param("tid")int tid,@Param("ndate") String ndate,@Param("ntitle") String ntitle ,@Param("ncontent") String ncontent, @Param("image")String image);
 
 }
