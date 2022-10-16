@@ -1,35 +1,27 @@
 package com.example.awstest2.controll;
 
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.zip.Deflater;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.example.awstest2.Service.FileUploadDownloadService;
 import com.example.awstest2.model.FileUploadResponse;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -58,12 +50,14 @@ public class FileUploadController {
     }
 
     @PostMapping("/uploadMultipleFiles")
-    public List<FileUploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files){
+    public List<FileUploadResponse> uploadMultipleFiles(@RequestParam("files") List<MultipartFile> files){
 
+       return files.stream().map(file->uploadFile(file)).collect(Collectors.toList());
+       /*
         return Arrays.asList(files)
                 .stream()
                 .map(file -> uploadFile(file))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")
@@ -88,6 +82,18 @@ public class FileUploadController {
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
+    }
+
+    @GetMapping(
+            value = "/loadFile/{fileName}",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    public @ResponseBody byte[] getImageFile(@PathVariable String fileName) throws IOException{
+
+        InputStream in = service.loadFileAsResource(fileName).getInputStream();
+
+        return in.readAllBytes();
+
     }
 
 

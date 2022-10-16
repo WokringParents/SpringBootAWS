@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -43,7 +44,7 @@ public class FileUploadDownloadService {
                 throw new FileUploadException("파일명에 부적합 문자가 포함되어 있습니다. " + fileName);
 
             Path targetLocation = this.fileLocation.resolve(fileName);
-
+            System.out.println("targetLocation: "+ targetLocation.toString());
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
             return fileName;
@@ -56,7 +57,11 @@ public class FileUploadDownloadService {
     public Resource loadFileAsResource(String fileName) {
         try {
             Path filePath = this.fileLocation.resolve(fileName).normalize();
+            System.out.println("filePath: "+ filePath.toString());
+            System.out.println("filePath.Uri: "+ filePath.toUri().toString());
+
             Resource resource = new UrlResource(filePath.toUri());
+            System.out.println("resource.getURL() : "+ resource.getURL().toString());
 
             if(resource.exists()) {
                 return resource;
@@ -65,6 +70,8 @@ public class FileUploadDownloadService {
             }
         }catch(MalformedURLException e) {
             throw new FileDownloadException(fileName + " 파일을 찾을 수 없습니다.", e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
