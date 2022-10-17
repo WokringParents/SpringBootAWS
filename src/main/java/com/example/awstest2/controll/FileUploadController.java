@@ -96,16 +96,5 @@ public class FileUploadController {
 
     }
 
-    @GetMapping(
-            value = "/loadFile/{nid}",
-            produces = MediaType.IMAGE_JPEG_VALUE
-    )
-    public @ResponseBody byte[] getImageFilebyNID(@PathVariable int nid,@RequestParam String fileName) throws IOException{
-
-        InputStream in = service.loadFileAsResource(fileName).getInputStream();
-        return in.readAllBytes();
-
-    }
-
 
 }
