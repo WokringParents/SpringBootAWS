@@ -3,7 +3,6 @@ package com.example.awstest2.controll;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -97,20 +96,16 @@ public class FileUploadController {
 
     }
 
-/*
-    @GetMapping("/loadFiles")
-    public InputStream getImageFiles()throws IOException{
-        InputStream in = service.loadFileAsResource("KakaoTalk_20220620_203756388.jpg").getInputStream();
-        InputStream in2= service.loadFileAsResource("KakaoTalk_20220620_203756388_01.jpg").getInputStream();
+    @GetMapping(
+            value = "/loadFile/{nid}",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    public @ResponseBody byte[] getImageFilebyNID(@PathVariable int nid,@RequestParam String fileName) throws IOException{
 
-        List<byte[]> bytes= new ArrayList<byte[]>();
-        bytes.add(in.readAllBytes());
-        bytes.add(in2.readAllBytes());
+        InputStream in = service.loadFileAsResource(fileName).getInputStream();
+        return in.readAllBytes();
 
-        return in;
     }
-*/
-
 
 
 }
