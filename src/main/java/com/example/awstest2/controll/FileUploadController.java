@@ -91,10 +91,8 @@ public class FileUploadController {
     public @ResponseBody byte[] getImageFile(@PathVariable String fileName) throws IOException{
 
         InputStream in = service.loadFileAsResource(fileName).getInputStream();
-
         return in.readAllBytes();
 
     }
-
 
 }

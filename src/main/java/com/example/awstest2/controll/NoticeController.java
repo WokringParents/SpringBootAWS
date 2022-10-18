@@ -27,7 +27,7 @@ public class NoticeController {
     }
 
     @PostMapping("/notice/{tid}")
-    public int postNotice(@PathVariable("tid") int tid, @RequestParam("ntitle") String ntitle,
+    public Notice postNotice(@PathVariable("tid") int tid, @RequestParam("ntitle") String ntitle,
                           @RequestParam("ncontent") String ncontent,  @RequestParam("image") String image) {
 
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
@@ -38,7 +38,7 @@ public class NoticeController {
     }
 
     @GetMapping("/notice/nid")
-    public int getNoticebyContent(@RequestParam("tid") int tid, @RequestParam("ndate") String ndate,
+    public Notice getNoticebyContent(@RequestParam("tid") int tid, @RequestParam("ndate") String ndate,
                                   @RequestParam("ncontent") String ncontent) {
         return mapper.getNoticeId(tid,ndate,ncontent);
     }
