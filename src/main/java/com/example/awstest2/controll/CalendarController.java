@@ -23,15 +23,17 @@ public class CalendarController {
     }
 
     @PostMapping("/calendar/{couplenum}")
-    public int insertCalender(@PathVariable("couplenum") int couplenum, @RequestParam("cdate") String cdate, @RequestParam("ctitle") String ctitle, @RequestParam("ccontent") String ccontent, @RequestParam("csex") String csex) {
+    public int insertCalender(@PathVariable("couplenum") int couplenum, @RequestParam("cdate") String cdate, @RequestParam("startTime") String startTime,
+                            @RequestParam("endTime") String endTime, @RequestParam("ccontent") String ccontent, @RequestParam("csex") String csex) {
 
-        return mapper.insertCalendar(couplenum,cdate,ctitle,ccontent,csex);
+        return mapper.insertCalendar(couplenum,cdate,startTime,endTime,ccontent,csex);
     }
 
     @PutMapping("/calendar/{couplenum}")
-    public int putCalendar(@PathVariable("couplenum")int couplenum, @RequestParam("cdate")String cdate, @RequestParam("ctitle") String ctitle, @RequestParam("ccontent") String ccontent) {
+    public int putCalendar(@PathVariable("couplenum")int couplenum,@RequestParam("cdate") String cdate, @RequestParam("startTime") String startTime,
+                           @RequestParam("endTime") String endTime, @RequestParam("ccontent") String ccontent) {
 
-        return mapper.putCalendar(couplenum,cdate,ctitle,ccontent);
+        return mapper.putCalendar(couplenum,cdate,startTime,endTime,ccontent);
 
     }
 
