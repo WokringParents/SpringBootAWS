@@ -66,4 +66,9 @@ public class NoticeController {
         return null;
     }
 
+    @DeleteMapping("/notice/delete")
+    public int deleteNotice(@RequestParam("nid") int nid) {
+        return mapper.deleteNotice(nid);
+
+    }
 }
