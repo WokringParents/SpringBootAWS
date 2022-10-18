@@ -3,6 +3,7 @@ package com.example.awstest2.controll;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,13 +37,28 @@ public class FileUploadController {
     public String controllerMain() {
         return "Hello~ File Upload Test.";
     }
-
-    @PostMapping("/uploadFile")
-    public FileUploadResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = service.storeFile(file);
+/*
+    @PostMapping("/uploadFile/cafeteria")
+    public FileUploadResponse uploadFileCafeteria(@RequestParam("file") MultipartFile file){
+        String fileName = service.storeFileCafeteria(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                .path("/downloadFile/cafeteria/")
+                .path(fileName)
+                .toUriString();
+
+        return new FileUploadResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+    }
+*/
+    @PostMapping("/uploadFile")
+    public FileUploadResponse uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("type") String type ) {
+
+        String fileName = service.storeFile(file,type);
+        System.out.println(fileName);
+        System.out.println(type);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/"+type+"/")
                 .path(fileName)
                 .toUriString();
 
@@ -51,19 +67,15 @@ public class FileUploadController {
 
     @PostMapping("/uploadMultipleFiles")
     public List<FileUploadResponse> uploadMultipleFiles(@RequestParam("files") List<MultipartFile> files){
+        //일단 다중업로드는 notice밖에 없으니까
+       return files.stream().map(file->uploadFile(file,"notice")).collect(Collectors.toList());
 
-       return files.stream().map(file->uploadFile(file)).collect(Collectors.toList());
-       /*
-        return Arrays.asList(files)
-                .stream()
-                .map(file -> uploadFile(file))
-                .collect(Collectors.toList());*/
     }
 
-    @GetMapping("/downloadFile/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request){
+    @GetMapping("/downloadFile/{type:.+}/{fileName:.+}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String type, @PathVariable String fileName, HttpServletRequest request){
         // Load file as Resource
-        Resource resource = service.loadFileAsResource(fileName);
+        Resource resource = service.loadFileAsResource(fileName,type);
 
         // Try to determine file's content type
         String contentType = null;
@@ -83,16 +95,69 @@ public class FileUploadController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
+/*
+    @GetMapping("/downloadFile/cafeteria/{fileName:.+}")
+    public ResponseEntity<Resource> downloadCafeteriaFile(@PathVariable String fileName, HttpServletRequest request){
+        // Load file as Resource
+        Resource resource = service.loadFileCafeteriaAsResource(fileName);
 
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            logger.info("Could not determine file type.");
+        }
+
+        // Fallback to the default content type if type could not be determined
+        if(contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .body(resource);
+    }
+*/
     @GetMapping(
-            value = "/loadFile/{fileName}",
+            value = "/loadFile/{type:.+}/{fileName:.+}",
             produces = MediaType.IMAGE_JPEG_VALUE
     )
-    public @ResponseBody byte[] getImageFile(@PathVariable String fileName) throws IOException{
+    public @ResponseBody byte[] getImageFile(@PathVariable String type ,@PathVariable String fileName) throws IOException{
 
-        InputStream in = service.loadFileAsResource(fileName).getInputStream();
+        InputStream in = service.loadFileAsResource(fileName,type).getInputStream();
+
         return in.readAllBytes();
 
     }
+
+/*    @GetMapping(
+            value = "/loadFile/cafeteria/{fileName}",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    public @ResponseBody byte[] getImageCafeteriaFile(@PathVariable String fileName) throws IOException{
+
+        InputStream in = service.loadFileCafeteriaAsResource(fileName).getInputStream();
+
+        return in.readAllBytes();
+
+    }*/
+
+/*
+    @GetMapping("/loadFiles")
+    public InputStream getImageFiles()throws IOException{
+        InputStream in = service.loadFileAsResource("KakaoTalk_20220620_203756388.jpg").getInputStream();
+        InputStream in2= service.loadFileAsResource("KakaoTalk_20220620_203756388_01.jpg").getInputStream();
+
+        List<byte[]> bytes= new ArrayList<byte[]>();
+        bytes.add(in.readAllBytes());
+        bytes.add(in2.readAllBytes());
+
+        return in;
+    }
+*/
+
+
 
 }

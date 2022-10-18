@@ -49,22 +49,6 @@ public class NoticeController {
     }
 
 
-    @PostMapping("/upload")
-    public ResponseEntity upload(@RequestPart MultipartFile file) {
-        String originalFileName = file.getOriginalFilename();
-        File destination = new File("upload/dir" + originalFileName);
-        try {
-            file.transferTo(destination);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(originalFileName);
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(originalFileName);
-    }
-
-    @GetMapping("/upload/dir/{filename}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request){
-        return null;
-    }
 
     @DeleteMapping("/notice/delete")
     public int deleteNotice(@RequestParam("nid") int nid) {
