@@ -26,17 +26,30 @@ public interface ChildMapper {
     @Insert("INSERT INTO Child (couplenum,kname,name,sex) VALUES(#{couplenum}, #{kname}, #{name}, #{sex})")
     int insertChildProfile(@Param("couplenum") int couplenum, @Param("kname") String kname, @Param("name") String name, @Param("sex") String sex);
 
-    @Select("SELECT name FROM Child")
-    List<String> getChildNameList();
+    @Select("SELECT pnumber FROM Child\n" +
+            "inner join Couple on Child.couplenum = Couple.couplenum \n" +
+            "inner join User on User.id = Couple.mid\n" +
+            "where Child.couplenum =#{couplenum}")
+    List<String> getFUserPnumber(@Param("couplenum") int couplenum);
+
+    @Select("\n" +
+            "SELECT pnumber FROM Child\n" +
+            "inner join Couple on Child.couplenum = Couple.couplenum \n" +
+            "inner join User on User.id = Couple.did  \n" +
+            "where Child.couplenum =#{couplenum}")
+    List<String> getMUserPnumber(@Param("couplenum") int couplenum);
 
     @Select("SELECT pnumber FROM Child\n" +
             "inner join Couple on Child.couplenum = Couple.couplenum \n" +
-            "inner join User on User.id = Couple.mid")
-    List<String> getFUserPnumber();
+            "inner join User on User.id = Couple.mid\n" +
+            "where Child.couplenum ={couplenum}")
+    List<String> getFUserToken(@Param("couplenum") int couplenum);
 
-    @Select("SELECT pnumber FROM Child\n" +
+    @Select("SELECT token FROM Child\n" +
             "inner join Couple on Child.couplenum = Couple.couplenum \n" +
-            "inner join User on User.id = Couple.did")
-    List<String> getMUserPnumber();
+            "inner join User on User.id = Couple.did\n" +
+            "where Child.couplenum = #{couplenum}")
+    List<String> getMUserToken(@Param("couplenum") int couplenum);
+
 
 }

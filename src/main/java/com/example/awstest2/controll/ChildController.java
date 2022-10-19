@@ -33,18 +33,24 @@ public class ChildController {
         return mapper.getChildHaving(couplenum);
     }
 
-    @GetMapping("/child/allName")
-    public ArrayList<String> getChildName() {
 
-        return new ArrayList<String>(mapper.getChildNameList());
-    }
-
+    //등하원게시판에서 부모님 폰번호와 토큰 가져오기
+    //User에 적어야하나 Child에 적어야하나 하다가..
+    //일단 여기 적었습니당
     @GetMapping("/pnumberForChild/{couplenum}")
-    public ArrayList<String> getUserPnumber() {
-        ArrayList<String> MomPnumber= new ArrayList<String>(mapper.getFUserPnumber());
-        ArrayList<String> DadPnumber= new ArrayList<String>(mapper.getMUserPnumber());
+    public ArrayList<String> getUserPnumber(@PathVariable("couplenum") int couplenum) {
+        ArrayList<String> MomPnumber= new ArrayList<String>(mapper.getFUserPnumber(couplenum));
+        ArrayList<String> DadPnumber= new ArrayList<String>(mapper.getMUserPnumber(couplenum));
         MomPnumber.addAll(DadPnumber);
         return MomPnumber;
+    }
+
+    @GetMapping("/tokenForChild/{couplenum}")
+    public ArrayList<String> getUserToken(@PathVariable("couplenum") int couplenum) {
+        ArrayList<String> MomToken= new ArrayList<String>(mapper.getFUserToken(couplenum));
+        ArrayList<String> DadToken= new ArrayList<String>(mapper.getMUserToken(couplenum));
+        MomToken.addAll(DadToken);
+        return MomToken;
     }
 
     @PostMapping("/child/{couplenum}")
