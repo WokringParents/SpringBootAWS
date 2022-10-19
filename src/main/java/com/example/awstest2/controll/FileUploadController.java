@@ -50,8 +50,8 @@ public class FileUploadController {
         return new FileUploadResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
     }
 */
-    @PostMapping("/uploadFile")
-    public FileUploadResponse uploadFile(@RequestParam("file") MultipartFile file, @RequestParam("type") String type ) {
+    @PostMapping("/uploadFile/{type:.+}")
+    public FileUploadResponse uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String type ) {
 
         String fileName = service.storeFile(file,type);
         System.out.println(fileName);
