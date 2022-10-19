@@ -37,7 +37,7 @@ public class ChildController {
     //등하원게시판에서 부모님 폰번호와 토큰 가져오기
     //User에 적어야하나 Child에 적어야하나 하다가..
     //일단 여기 적었습니당
-    @GetMapping("/pnumberForChild/{couplenum}")
+    @GetMapping("/pnumberForGoback/{couplenum}")
     public ArrayList<String> getUserPnumber(@PathVariable("couplenum") int couplenum) {
         ArrayList<String> MomPnumber= new ArrayList<String>(mapper.getFUserPnumber(couplenum));
         ArrayList<String> DadPnumber= new ArrayList<String>(mapper.getMUserPnumber(couplenum));
@@ -45,7 +45,7 @@ public class ChildController {
         return MomPnumber;
     }
 
-    @GetMapping("/tokenForChild/{couplenum}")
+    @GetMapping("/tokenForGoback/{couplenum}")
     public ArrayList<String> getUserToken(@PathVariable("couplenum") int couplenum) {
         ArrayList<String> MomToken= new ArrayList<String>(mapper.getFUserToken(couplenum));
         ArrayList<String> DadToken= new ArrayList<String>(mapper.getMUserToken(couplenum));

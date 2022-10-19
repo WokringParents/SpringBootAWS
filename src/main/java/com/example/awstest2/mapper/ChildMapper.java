@@ -39,10 +39,10 @@ public interface ChildMapper {
             "where Child.couplenum =#{couplenum}")
     List<String> getMUserPnumber(@Param("couplenum") int couplenum);
 
-    @Select("SELECT pnumber FROM Child\n" +
+    @Select("SELECT token FROM Child\n" +
             "inner join Couple on Child.couplenum = Couple.couplenum \n" +
             "inner join User on User.id = Couple.mid\n" +
-            "where Child.couplenum ={couplenum}")
+            "where Child.couplenum =#{couplenum}")
     List<String> getFUserToken(@Param("couplenum") int couplenum);
 
     @Select("SELECT token FROM Child\n" +
