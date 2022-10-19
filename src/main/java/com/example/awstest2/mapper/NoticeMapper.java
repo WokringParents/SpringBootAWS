@@ -19,4 +19,7 @@ public interface NoticeMapper {
     @Insert("INSERT INTO Notice (tid,ndate,ntitle,ncontent,image) VALUES (#{tid},#{ndate},#{ntitle},#{ncontent},#{image})")
     int insertNotice(@Param("tid")int tid,@Param("ndate") String ndate,@Param("ntitle") String ntitle ,@Param("ncontent") String ncontent, @Param("image")String image);
 
+    @Delete("DELETE FROM Notice WHERE nid=#{nid}")
+    int deleteNotice(@Param("nid")int nid);
+
 }
