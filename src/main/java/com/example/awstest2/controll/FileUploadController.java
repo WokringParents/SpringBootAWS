@@ -65,10 +65,10 @@ public class FileUploadController {
         return new FileUploadResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
     }
 
-    @PostMapping("/uploadMultipleFiles")
-    public List<FileUploadResponse> uploadMultipleFiles(@RequestParam("files") List<MultipartFile> files){
+    @PostMapping("/uploadMultipleFiles/{type:.+}")
+    public List<FileUploadResponse> uploadMultipleFiles(@RequestParam("files") List<MultipartFile> files, @PathVariable String type){
         //일단 다중업로드는 notice밖에 없으니까
-       return files.stream().map(file->uploadFile(file,"notice")).collect(Collectors.toList());
+       return files.stream().map(file->uploadFile(file,type)).collect(Collectors.toList());
 
     }
 
