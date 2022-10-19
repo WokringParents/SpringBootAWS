@@ -33,6 +33,20 @@ public class ChildController {
         return mapper.getChildHaving(couplenum);
     }
 
+    @GetMapping("/child/allName")
+    public ArrayList<String> getChildName() {
+
+        return new ArrayList<String>(mapper.getChildNameList());
+    }
+
+    @GetMapping("/pnumberForChild/{couplenum}")
+    public ArrayList<String> getUserPnumber() {
+        ArrayList<String> MomPnumber= new ArrayList<String>(mapper.getFUserPnumber());
+        ArrayList<String> DadPnumber= new ArrayList<String>(mapper.getMUserPnumber());
+        MomPnumber.addAll(DadPnumber);
+        return MomPnumber;
+    }
+
     @PostMapping("/child/{couplenum}")
     public int postChildProfile(@PathVariable("couplenum") int couplenum, @RequestParam("kname") String kname,  @RequestParam("name") String name,  @RequestParam("sex") String sex) {
         return mapper.insertChildProfile(couplenum, kname, name, sex);
