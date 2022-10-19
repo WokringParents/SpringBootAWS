@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface NoticeMapper {
 
-    @Select("SELECT * FROM Notice ORDER BY ndate")
+    @Select("SELECT * FROM Notice ORDER BY ndate DESC")
     List<Notice> getNotice();
 
     @Select("SELECT * FROM Notice WHERE tid=#{tid} AND ndate=#{ndate} AND ncontent=#{ncontent}")
