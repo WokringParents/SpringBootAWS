@@ -26,5 +26,9 @@ public interface UserMapper {
     @Update("UPDATE User SET token=#{token} WHERE id=#{id}")
     int updateUserToken(@Param("id") String id, @Param("token") String token);
 
+    @Insert("INSERT INTO User VALUES(#{id}, #{pw}, #{email}, #{sex}, #{token}, #{name}, #{pnumber}, #{city}, #{village})")
+    int postAlarmPosting(@Param("auserid") String auserid, @Param("atype") int atype, @Param("acontent") String acontent);
+
+
 
 }

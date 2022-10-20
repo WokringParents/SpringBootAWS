@@ -45,7 +45,17 @@ public class UserController {
         return mapper.updateUserToken(id,token);
     }
 
+    //알람 모음
+    @PostMapping("/alarmPosting/{auserid}")
+    public int postAlarmPosting(@PathVariable("auserid") String auserid, @RequestParam("atype") int atype,@RequestParam("acontent") String acontent) {
+        return mapper.postAlarmPosting(auserid,atype,acontent);
+    }
 
+  /*  @PostMapping("/alarmGoback/{auserid}")
+    public int postAlarmGoback(@PathVariable("auserid") String auserid, @RequestParam("atype") int atype,@RequestParam("acontent") String acontent) {
+        return mapper.postAlarmGoback(auserid,atype,acontent);
+    }
+*/
 
 
 }
